@@ -1,0 +1,24 @@
+{
+  description = "My corne keyboard configuration";
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } ./nix/flake;
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    systems.url = "github:nix-systems/default";
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    treefmt = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zmk = {
+      url = "github:lilyinstarlight/zmk-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+}
